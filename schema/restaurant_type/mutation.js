@@ -28,7 +28,7 @@ module.exports = {
     },
     resolve: (parentValue, {_id, name}) => {
       return new Promise((resolve, reject) => {
-        model.findByIdAndUpdate(_id, {name}, (err, data) => {
+        model.findOneAndUpdate({_id}, {name}, {new: true}, (err, data) => {
           err ? reject(err) : resolve(data);
         });
       });

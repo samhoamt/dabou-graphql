@@ -1,15 +1,17 @@
 import {
   GraphQLString,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLList
 } from 'graphql/type';
 import type from './type';
 import model from './model';
 
 module.exports = {
-  addCuisine: {
+  addMenu: {
     type: type,
     args: {
-      name: { type: new GraphQLNonNull(GraphQLString) }
+      name: { type: new GraphQLNonNull(GraphQLString) },
+      items: { type: new GraphQLList(GraphQLString) }
     },
     resolve: (parentValue, args) => {
       return new Promise((resolve, reject) => {
@@ -20,21 +22,22 @@ module.exports = {
       });
     }
   },
-  updateCuisine: {
+  updateMenu: {
     type: type,
     args: {
       _id: { type: new GraphQLNonNull(GraphQLString) },
-      name: { type: new GraphQLNonNull(GraphQLString) }
+      name: { type: GraphQLString },
+      items: { type: new GraphQLList(GraphQLString) }
     },
-    resolve: (parentValue, {_id, name}) => {
+    resolve: (parentValue, {_id, name, items}) => {
       return new Promise((resolve, reject) => {
-        model.findOneAndUpdate({_id}, {name}, {new: true}, (err, data) => {
+        model.findOneAndUpdate({_id}, {name, items}, {new: true}, (err, data) => {
           err ? reject(err) : resolve(data);
         });
       });
     }
   },
-  deleteCuisine: {
+  deleteMenu: {
     type: type,
     args: {
       _id: { type: new GraphQLNonNull(GraphQLString) }

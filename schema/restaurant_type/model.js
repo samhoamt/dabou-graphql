@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const restaurantTypeSchema = new Schema({
-  name: "String"
+  name: String
 });
 
 module.exports = mongoose.model('restaurantType', restaurantTypeSchema);
