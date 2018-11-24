@@ -5,6 +5,7 @@ import restaurantMutation from './restaurant/mutation'
 import restaurantTypeMutation from './restaurant_type/mutation';
 import menuMutation from './menu/mutation';
 import menuItemMutation from './menu_item/mutation';
+import merchantMutation from './merchant/mutation';
 
 module.exports = new GraphQLObjectType({
   name: 'Mutation',
@@ -13,6 +14,7 @@ module.exports = new GraphQLObjectType({
     ...restaurantMutation,
     ...restaurantTypeMutation,
     ...menuMutation,
-    ...menuItemMutation
+    ...menuItemMutation,
+    ...merchantMutation
   }
 });

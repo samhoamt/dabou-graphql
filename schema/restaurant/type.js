@@ -6,14 +6,14 @@ import {
 } from 'graphql/type';
 import GraphQLObjectId from 'graphql-scalar-objectid';
 import cuisine from '../cuisine/model';
-import restaurantType from '../restaurant_type/model'
+import restaurantType from '../restaurant_type/model';
+import merchant from '../merchant/model';
 
 module.exports = new GraphQLObjectType({
   name: 'restaurantType',
   fields: () => ({
     _id: { type: GraphQLObjectId },
     name: { type: GraphQLString },
-    merchant: { type: GraphQLString },
     cityCode: { type: GraphQLString },
     address: { type: GraphQLString },
     postal: { type: GraphQLString },
@@ -37,6 +37,16 @@ module.exports = new GraphQLObjectType({
       resolve: (parentValue, args) => {
         return new Promise((resolve, reject) => {
           restaurantType.findOne({_id: parentValue.typeId}, (err, data) => {
+            err ? reject(err) : resolve(data);
+          });
+        })
+      }
+    },
+    merchant: {
+      type: require('../merchant/type'),
+      resolve: (parentValue, args) => {
+        return new Promise((resolve, reject) => {
+          merchant.findOne({_id: parentValue.merchant}, (err, data) => {
             err ? reject(err) : resolve(data);
           });
         })

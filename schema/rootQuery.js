@@ -5,6 +5,7 @@ import restaurantQuery from './restaurant/query';
 import restaurantTypeQuery from './restaurant_type/query';
 import menuQuery from './menu/query';
 import menuItemQuery from './menu_item/query';
+import merchantQuery from './merchant/query';
 
 module.exports = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -13,6 +14,7 @@ module.exports = new GraphQLObjectType({
     ...restaurantQuery,
     ...restaurantTypeQuery,
     ...menuQuery,
-    ...menuItemQuery
+    ...menuItemQuery,
+    ...merchantQuery
   }
 });
